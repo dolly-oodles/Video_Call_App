@@ -1,0 +1,36 @@
+/* MeetingList.css */
+.meeting-list-container {
+    max-width: 300px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 10px;
+  
+  }
+  
+  
+  .meeting-list-container input,
+  .meeting-list-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .meeting-list-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0e77ee;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none; 
+  }
+  
+  .meeting-list-container button:hover {
+    background-color: #033799;
+  }
+  
