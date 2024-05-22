@@ -4,20 +4,23 @@ import { FaCamera, FaMicrophone, FaMicrophoneSlash } from "react-icons/fa";
 import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
 import { MdOutlineScreenShare } from "react-icons/md";
 import { MdOutlineStopScreenShare } from "react-icons/md";
+import { PiSelectionBackgroundBold } from "react-icons/pi";
 import Sidebar from "./Sidebar";
 import "../css/JoinScreen.css";
-import { useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import * as bodyPix from "@tensorflow-models/body-pix";
+import "@tensorflow/tfjs";
 
 function JoinScreen() {
-
   const [videoControls, setVideoControls] = useState(false);
   const [audioControls, setAudioControls] = useState(true);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [stream, setStream] = useState(null);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   const location = useLocation();
-  const {candidateName} = location.state || {};
+  const { candidateName } = location.state || {};
 
   const generateRandomColor = () => {
     const letters = "0123456789ABCDEF";
@@ -89,6 +92,44 @@ function JoinScreen() {
     }
   };
 
+  // useEffect(() => {
+  //   if (stream) {
+  //     const videoElement = document.querySelector("video#localVideo");
+  //     videoElement.addEventListener("loadeddata", () => {
+  //       setIsVideoLoaded(true);
+  //     });
+  //   }
+  // }, [stream]);
+
+  // useEffect(() => {
+  //   if (isVideoLoaded) {
+  //     loadAndPredict();
+  //   }
+  // }, [isVideoLoaded]);
+
+  // async function loadAndPredict() {
+  //   let net = await bodyPix.load();
+
+  //   const videoElement = document.querySelector("video#localVideo");
+  //   const canvasElement = document.querySelector("canvas#outputCanvas");
+  //   const ctx = canvasElement.getContext("2d");
+
+  //   const processFrame = async () => {
+  //     const segmentation = await net.segmentPerson(videoElement);
+  //     const maskBackground = bodyPix.toMask(segmentation);
+  //     bodyPix.drawMask(
+  //       canvasElement,
+  //       videoElement,
+  //       maskBackground,
+  //       { r: 0, g: 0, b: 0, a: 255 },
+  //       0,
+  //       false
+  //     );
+  //     requestAnimationFrame(processFrame);
+  //   };
+  //   processFrame();
+  // }
+
   return (
     <div style={{ display: "flex" }}>
       <Sidebar />
@@ -142,6 +183,7 @@ function JoinScreen() {
               onClick={toggleAudio}
             />
           )}
+
           {isScreenSharing ? (
             <MdOutlineStopScreenShare
               size={"1.6rem"}
@@ -169,7 +211,11 @@ function JoinScreen() {
               onClick={toggleFullScreen}
             />
           )}
+{/* 
+          <PiSelectionBackgroundBold size={"1.6rem"} className="control-icon" onClick={loadAndPredict}/>
+         {isVideoLoaded && <canvas id="outputCanvas"></canvas>}  */}
         </div>
+        
       </div>
     </div>
   );
