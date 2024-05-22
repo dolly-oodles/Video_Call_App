@@ -6,17 +6,18 @@ import { MdOutlineScreenShare } from "react-icons/md";
 import { MdOutlineStopScreenShare } from "react-icons/md";
 import Sidebar from "./Sidebar";
 import "../css/JoinScreen.css";
-import { useLocation } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 
 function JoinScreen() {
-  const location = useLocation();
-  const { candidateName } = location.state || {};
 
   const [videoControls, setVideoControls] = useState(false);
   const [audioControls, setAudioControls] = useState(true);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [stream, setStream] = useState(null);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
+
+  const location = useLocation();
+  const {candidateName} = location.state || {};
 
   const generateRandomColor = () => {
     const letters = "0123456789ABCDEF";

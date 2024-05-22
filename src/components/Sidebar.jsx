@@ -12,7 +12,6 @@ function Sidebar() {
           justifyContent: "center",
           paddingTop:"10px",
           width: "20vw",
-          borderTopLeftRadius: "20px",
           backgroundColor: "black",
           paddingLeft:"5px"
         }}

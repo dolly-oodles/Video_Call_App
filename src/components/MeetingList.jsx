@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState,useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { selectMeeting } from '../Redux/Reducers/meetingSlice';
-import "../css/MeetingList.css";// Import the CSS file
+import { selectMeeting, addRequest } from '../Redux/Reducers/meetingSlice';
+import "../css/MeetingList.css";
 
 const MeetingList = () => {
   const [candidateName, setCandidateName] = useState('');
   const [selectedMeetingId, setSelectedMeetingId] = useState('');
-  const meetings = useSelector(selectMeeting);
+  const  {meetingRoom}  = useSelector(selectMeeting) || [];
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   const handleJoinMeeting = () => {
     if (candidateName.trim() === '') {
@@ -19,12 +22,18 @@ const MeetingList = () => {
       alert('Please select a meeting before joining.');
       return;
     } 
-    navigate(`/meetRoom/${selectedMeetingId}`, { state: { candidateName } });
-  };
+    const requestId = new Date().getTime(); 
+   dispatch(addRequest({ id: requestId, candidateName, meetingId: selectedMeetingId }));
+    
+    setCandidateName('');
+    setSelectedMeetingId('');
+    alert('Your request to join the meeting has been sent to the admin.');
+    navigate('/admin');
+
+};
 
   return (
     <div className="meeting-list-container">
-    
       <input
         type="text"
         placeholder="Enter your name"
@@ -33,7 +42,7 @@ const MeetingList = () => {
       />
       <select onChange={(e) => setSelectedMeetingId(e.target.value)} value={selectedMeetingId}>
         <option value="">Select a meeting</option>
-        {meetings.map((meeting) => (
+        {meetingRoom.map((meeting) => (
           <option key={meeting.id} value={meeting.id}>{meeting.title}</option>
         ))}
       </select>

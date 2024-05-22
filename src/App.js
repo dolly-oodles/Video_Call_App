@@ -3,9 +3,9 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CreateMeetingRoom from './components/MeetingRoom';
 import { store } from './Redux/store';
-// import MeetingList from './components/MeetingList';
 import JoinScreen from './components/JoinScreen';
 import Sidebar from './components/Sidebar';
+import AdminPanel from './components/AdminPanel';
 
 function App() {
   return (
@@ -14,7 +14,8 @@ function App() {
         <Routes>
           <Route path="/" element={<CreateMeetingRoom />} />
           <Route path="/meetings/:meetingId" element={<Sidebar />} />
-          <Route path="/meetRoom/:meetingId" element={<JoinScreen />} />
+          <Route path='/admin' element={<AdminPanel/>}/>
+          <Route path="/meetRoom/:id" element={<JoinScreen />} />
         </Routes>
       </Router>
     </Provider>

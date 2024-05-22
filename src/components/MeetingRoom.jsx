@@ -49,11 +49,13 @@ const CreateMeetingRoom = () => {
       color: '#fff',
       fontSize: '16px',
       cursor: 'pointer',
+      userSelect: 'none'
     },
     title: {
       marginBottom: '20px',
       fontSize: '24px',
       color: '#333',
+      userSelect: 'none'
     },
   };
 
