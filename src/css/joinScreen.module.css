@@ -1,10 +1,6 @@
-/* JoinScreen.css */
-body{
-  margin: 0;
-  padding: 0;
-  background-attachment: fixed;
-}
-.join-screen {
+/* joinScreen.module.css */
+
+.joinScreen {
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -12,13 +8,11 @@ body{
     justify-content: space-between;
     height: 100vh;
     width: 100vw;
-   padding-top: 10px;
+    padding-top: 10px;
     background-color: #18191adc;
-    
-    /* position: relative; */
   }
   
-  .video-element {
+  .videoElement {
     width: 100%;
     height: 80%;
     max-width: 1200px;
@@ -34,50 +28,33 @@ body{
     margin-bottom: 10px;
   }
   
-  .control-icon {
+  .controlIcon {
     cursor: pointer;
     color: #ffffffd0;
     background-color: rgba(240, 248, 255, 0.192);
     border-radius: 50%;
-    padding: 12px;
+    padding: 6px;
     opacity: 2px;
     transition: color 0.3s ease;
   }
   
-  .control-icon:hover {
-    /* color: #e62d2d; */
+  .controlIcon:hover {
     background-color: #2487f7d5;
   }
   
-  .control-icon:active {
+  .controlIcon:active {
     transform: scale(0.95);
   }
- 
-  /* .avatar-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    padding: 80px;
-    border: 2px solid white;
-    color: white;
-    text-transform: uppercase;
-    background-color: #b5e62d;
-  }
-  .user-avatar {
-    fill: #b5e62d;
-  } */
-
-  .avatar-container {
+  
+  .avatarContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 150px auto;
-
   }
   
-  .avatar-circle {
+  .avatarCircle {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -92,9 +69,9 @@ body{
     user-select: none; 
   }
   
-  .avatar-initial {
+  .avatarInitial {
     color: white;
     font-size: 5rem;
     font-weight: bold;
-    
   }
+  

@@ -31,6 +31,7 @@ const CreateMeetingRoom = () => {
       justifyContent: 'center',
       height: '100vh',
       backgroundColor: '#f0f2f5',
+      width:'70vw'
     },
     input: {
       padding: '10px',

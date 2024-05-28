@@ -2,17 +2,13 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import meetingReducer from './Reducers/meetingSlice';
-import { loadState, saveState } from '../utils/localStorage'; // Import utility functions
-
-const preloadedState = loadState();
+import { CRUD_APIReducer } from './Reducers/CRUD_API.reducers';
 
 export const store = configureStore({
   reducer: {
     meeting: meetingReducer,
+    CRUD_API: CRUD_APIReducer,
   },
-  // preloadedState: preloadedState,
 });
 
-// store.subscribe(() => {
-//   saveState(store.getState().meeting);
-// });
+

@@ -4,12 +4,10 @@ import { FaCamera, FaMicrophone, FaMicrophoneSlash } from "react-icons/fa";
 import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
 import { MdOutlineScreenShare } from "react-icons/md";
 import { MdOutlineStopScreenShare } from "react-icons/md";
-import { PiSelectionBackgroundBold } from "react-icons/pi";
+
 import Sidebar from "./Sidebar";
-import "../css/JoinScreen.css";
+import styles from "../css/joinScreen.module.css"; // Importing CSS module
 import { useLocation } from "react-router-dom";
-import * as bodyPix from "@tensorflow-models/body-pix";
-import "@tensorflow/tfjs";
 
 function JoinScreen() {
   const [videoControls, setVideoControls] = useState(false);
@@ -17,7 +15,6 @@ function JoinScreen() {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [stream, setStream] = useState(null);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   const location = useLocation();
   const { candidateName } = location.state || {};
@@ -92,128 +89,88 @@ function JoinScreen() {
     }
   };
 
-  // useEffect(() => {
-  //   if (stream) {
-  //     const videoElement = document.querySelector("video#localVideo");
-  //     videoElement.addEventListener("loadeddata", () => {
-  //       setIsVideoLoaded(true);
-  //     });
-  //   }
-  // }, [stream]);
-
-  // useEffect(() => {
-  //   if (isVideoLoaded) {
-  //     loadAndPredict();
-  //   }
-  // }, [isVideoLoaded]);
-
-  // async function loadAndPredict() {
-  //   let net = await bodyPix.load();
-
-  //   const videoElement = document.querySelector("video#localVideo");
-  //   const canvasElement = document.querySelector("canvas#outputCanvas");
-  //   const ctx = canvasElement.getContext("2d");
-
-  //   const processFrame = async () => {
-  //     const segmentation = await net.segmentPerson(videoElement);
-  //     const maskBackground = bodyPix.toMask(segmentation);
-  //     bodyPix.drawMask(
-  //       canvasElement,
-  //       videoElement,
-  //       maskBackground,
-  //       { r: 0, g: 0, b: 0, a: 255 },
-  //       0,
-  //       false
-  //     );
-  //     requestAnimationFrame(processFrame);
-  //   };
-  //   processFrame();
-  // }
-
   return (
     <div style={{ display: "flex" }}>
       <Sidebar />
 
-      <div className="join-screen">
+      <div className={styles.joinScreen}>
         {videoControls || isScreenSharing ? (
           <video
             id="localVideo"
             autoPlay
             playsInline
             controls={false}
-            className="video-element"
+            className={styles.videoElement}
           />
         ) : (
-          <div className="avatar-container">
+          <div className={styles.avatarContainer}> 
             <div
-              className="avatar-circle"
+              className={styles.avatarCircle} 
               style={{ backgroundColor: avatarBgColor }}
             >
-              <span className="avatar-initial">
+              <span className={styles.avatarInitial}> 
                 {candidateName ? candidateName.charAt(0).toUpperCase() : ""}
               </span>
             </div>
           </div>
         )}
 
-        <div className="controls">
+        <div className={styles.controls}> 
           {videoControls ? (
             <FaCamera
-              size={"1.6rem"}
-              className="control-icon"
+              size={"2.4rem"} 
+              className={styles.controlIcon} 
               onClick={toggleVideo}
             />
           ) : (
             <BiSolidCameraOff
-              size={"1.6rem"}
-              className="control-icon"
+               size={"2.4rem"}
+              className={styles.controlIcon} 
               onClick={toggleVideo}
             />
           )}
           {audioControls ? (
             <FaMicrophone
-              size={"1.6rem"}
-              className="control-icon"
+              size={"2.4rem"}
+              className={styles.controlIcon} 
               onClick={toggleAudio}
             />
           ) : (
             <FaMicrophoneSlash
-              size={"1.6rem"}
-              className="control-icon"
+               size={"2.4rem"}
+              className={styles.controlIcon} 
               onClick={toggleAudio}
             />
           )}
 
           {isScreenSharing ? (
             <MdOutlineStopScreenShare
-              size={"1.6rem"}
-              className="control-icon"
+             size={"2.4rem"}
+              className={styles.controlIcon} 
               onClick={toggleScreenSharing}
             />
           ) : (
             <MdOutlineScreenShare
-              size={"1.6rem"}
-              className="control-icon"
+              size={"2.4rem"}
+              className={styles.controlIcon} 
               onClick={toggleScreenSharing}
             />
           )}
 
           {isFullScreen ? (
             <MdFullscreenExit
-              size={"1.6rem"}
-              className="control-icon"
+               size={"2.4rem"}
+              className={styles.controlIcon} 
               onClick={toggleFullScreen}
             />
           ) : (
             <MdFullscreen
-              size={"1.6rem"}
-              className="control-icon"
+               size={"2.4rem"}
+              className={styles.controlIcon} 
               onClick={toggleFullScreen}
             />
           )}
-{/* 
-          <PiSelectionBackgroundBold size={"1.6rem"} className="control-icon" onClick={loadAndPredict}/>
-         {isVideoLoaded && <canvas id="outputCanvas"></canvas>}  */}
+
         </div>
         
       </div>

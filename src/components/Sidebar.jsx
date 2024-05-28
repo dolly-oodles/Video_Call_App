@@ -29,9 +29,7 @@ function Sidebar() {
         >
         <SiGooglemeet size={"3rem"} />
 
-          <MeetingList/>
-         
-        
+          <MeetingList/>  
         </div>
       </div>
     </>
