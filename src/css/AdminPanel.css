@@ -4,7 +4,7 @@
     background-color: rgba(179, 198, 224, 0.562);
     user-select: none; 
     height: 100vh;
-    width: 100vw;
+    width: 90vw;
   }
   
   .admin-panel h2 {
@@ -34,10 +34,11 @@
   }
   
   
-  .btn{
+  .btns{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 1rem;
   }
   .approve-btn, .deny-btn {
     padding: 5px 10px;

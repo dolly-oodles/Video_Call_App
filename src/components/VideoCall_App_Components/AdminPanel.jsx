@@ -49,7 +49,7 @@ const AdminPanel = () => {
               <tr key={request.id}>
                 <td>{request.candidateName}</td>
                 <td>{request.meetingId}</td>
-                <td className="btn">
+                <td className="btns">
                   <button
                     className="approve-btn"
                     onClick={() => handleApprove(request.id)}

@@ -4,8 +4,9 @@ import { FaCamera, FaMicrophone, FaMicrophoneSlash } from "react-icons/fa";
 import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
 import { MdOutlineScreenShare } from "react-icons/md";
 import { MdOutlineStopScreenShare } from "react-icons/md";
+import { HiOutlinePhoneMissedCall } from "react-icons/hi";
 import styles from "../../css/joinScreen.module.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function JoinScreen() {
   const [videoControls, setVideoControls] = useState(false);
@@ -15,6 +16,7 @@ function JoinScreen() {
   const [isScreenSharing, setIsScreenSharing] = useState(false);
 
   const location = useLocation();
+  const navigate = useNavigate();
   const { candidateName } = location.state || {};
 
   const generateRandomColor = () => {
@@ -87,6 +89,13 @@ function JoinScreen() {
     }
   };
 
+  const handleLeaveMeeting = () => {
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+      setStream(null);
+    }
+    navigate("/createMeeting");
+  };
   return (
     <div className={styles.joinScreen}>
       {videoControls || isScreenSharing ? (
@@ -165,6 +174,11 @@ function JoinScreen() {
             onClick={toggleFullScreen}
           />
         )}
+        <HiOutlinePhoneMissedCall
+          size={"2.4rem"}
+          className={styles.callcontrolIcon}
+          onClick={handleLeaveMeeting}
+        />
       </div>
     </div>
   );
