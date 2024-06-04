@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 
 const Layout = () => {
   return (
-    <div className="flex overflow-hidden">
+    <div className="flex overflow-auto">
       <Sidebar />
       <div className="flex align-center justify-center flex-1 ">
         <Outlet />

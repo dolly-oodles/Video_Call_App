@@ -22,13 +22,17 @@ const Home = () => {
 
   return (
     <div
-      className="flex justify-between w-full 
-      h-full rounded-xl shadow-lg
+      className="flex justify-between w-full h-full
+       rounded-xl shadow-lg
        bg-gray-400 bg-clip-padding
         backdrop-filter backdrop-blur-lg 
         bg-opacity-0"
     >
-      <div className={`w-[40%] md:flex ${isSidebarVisible ? "" : "hidden"}`}>
+      <div
+        className={`w-[40%] h-screen md:flex ${
+          isSidebarVisible ? "" : "hidden"
+        }`}
+      >
         <ChatSidebar onSelectUser={handleUserSelect} />
       </div>
       <div

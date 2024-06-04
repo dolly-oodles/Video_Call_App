@@ -115,7 +115,7 @@ const ChatSidebar = ({ onSelectUser }) => {
   };
 
   return (
-    <div className="h-full w-full m-5">
+    <div className="w-full m-5">
       <div className="flex justify-between gap-2">
         <form
           onSubmit={handelSearchSubmit}
@@ -141,7 +141,7 @@ const ChatSidebar = ({ onSelectUser }) => {
       <div className="divider px-3"></div>
       {searchUser?.length > 0 ? (
         <>
-          <div className="min-h-[70%] max-h-[80%] m overflow-y-auto scrollbar ">
+          <div className="h-[calc(100%-125px)] overflow-y-auto scrollbar ">
             <div className="w-auto">
               {searchUser.map((user, index) => (
                 <div key={user._id}>
