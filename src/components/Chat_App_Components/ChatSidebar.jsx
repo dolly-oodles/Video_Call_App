@@ -139,9 +139,10 @@ const ChatSidebar = ({ onSelectUser }) => {
         />
       </div>
       <div className="divider px-3"></div>
+
       {searchUser?.length > 0 ? (
         <>
-          <div className="h-[calc(100%-125px)] overflow-y-auto scrollbar ">
+          <div className="h-[calc(100%-125px)] overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600 hover:scrollbar-thumb-sky-700">
             <div className="w-auto">
               {searchUser.map((user, index) => (
                 <div key={user._id}>

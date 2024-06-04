@@ -113,7 +113,7 @@ const MessageContainer = ({ onBackUser }) => {
               </div>
             </div>
           </div>
-          <div className=" overflow-auto  h-[calc(100vh-180px)] my-2">
+          <div className="overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600 hover:scrollbar-thumb-sky-700 h-[calc(100vh-180px)] my-2">
             {loading && (
               <div className="flex w-full h-full flex-col items-center justify-center gap-4 bg-transparent ">
                 <div className="loading loading-spinner"></div>
