@@ -10,7 +10,7 @@ const initialState = {
 
 export const handleCreateAPI = createAsyncThunk(
   "createAPI",
-  async (data, { rejectWithValue }) => {
+  async (data, { dispatch, rejectWithValue }) => {
     const {
       itemName,
       description,
@@ -39,10 +39,10 @@ export const handleCreateAPI = createAsyncThunk(
         }
       );
 
-      console.log(res);
       if (res.status === 201) {
         toast.success("Created Data Successfully");
         setLoading(false);
+        dispatch(handleReadAPI());
         navigate("/ReadAPI");
         return res.data;
       } else {

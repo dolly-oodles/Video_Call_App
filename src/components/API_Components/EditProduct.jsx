@@ -64,8 +64,8 @@ const EditProduct = ({ product, onClose }) => {
               {...register("description", {
                 required: "Description is required",
                 minLength: {
-                  value: 20,
-                  message: "Title must be at least 20 characters",
+                  value: 10,
+                  message: "Title must be at least 10 characters",
                 },
               })}
               className="w-full h-12 px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
