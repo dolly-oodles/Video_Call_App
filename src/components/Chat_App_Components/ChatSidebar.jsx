@@ -185,7 +185,7 @@ const ChatSidebar = ({ onSelectUser }) => {
         </>
       ) : (
         <>
-          <div className="min-h-[70%] max-h-[80%] m overflow-y-auto scrollbar ">
+          <div className="h-[calc(100%-125px)] overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600 hover:scrollbar-thumb-sky-700 ">
             <div className="w-auto">
               {chatUser.length === 0 ? (
                 <>
