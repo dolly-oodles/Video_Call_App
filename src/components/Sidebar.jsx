@@ -1,6 +1,9 @@
 import React from "react";
-import { SiGooglemeet } from "react-icons/si";
-import MeetingList from "./MeetingList";
+import { SiPlausibleanalytics } from "react-icons/si";
+import { TbApi } from "react-icons/tb";
+import { BsChatDotsFill } from "react-icons/bs";
+import { FaCamera } from "react-icons/fa";
+import { Link, Outlet } from "react-router-dom";
 
 function Sidebar() {
   return (
@@ -10,10 +13,11 @@ function Sidebar() {
           height: "100vh",
           display: "flex",
           justifyContent: "center",
-          paddingTop:"10px",
-          width: "20vw",
+          width: "10vw",
+          maxWidth: "300px",
           backgroundColor: "black",
-          paddingLeft:"5px"
+          paddingTop: "15px",
+          position: "sticky",
         }}
       >
         <div
@@ -27,9 +31,19 @@ function Sidebar() {
             alignItems: "center",
           }}
         >
-        <SiGooglemeet size={"3rem"} />
-
-          <MeetingList/>  
+          <Link to="/">
+            {" "}
+            <SiPlausibleanalytics size={"3rem"} />
+          </Link>
+          <Link to="/createMeeting">
+            <FaCamera size={"1.6rem"} />
+          </Link>
+          <Link to="/chatapp">
+            <BsChatDotsFill size={"1.6rem"} />
+          </Link>
+          <Link to="CreateAPI">
+            <TbApi size={"1.8rem"} />
+          </Link>
         </div>
       </div>
     </>

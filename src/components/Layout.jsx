@@ -1,12 +1,12 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import MainSidebar from './MainSidebar';
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Sidebar from "./Sidebar";
 
 const Layout = () => {
   return (
-    <div style={{ display: 'flex' }}>
-      <MainSidebar/>
-      <div style={{ flex: 1 }}>
+    <div className="flex overflow-hidden">
+      <Sidebar />
+      <div className="flex align-center justify-center flex-1 ">
         <Outlet />
       </div>
     </div>

@@ -1,32 +1,46 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import CreateMeetingRoom from './components/MeetingRoom';
-import { store } from './Redux/store';
-import JoinScreen from './components/JoinScreen';
-import Sidebar from './components/Sidebar';
-import AdminPanel from './components/AdminPanel';
-import CreateAPI from './components/API_Components/CreateApi';
-import ReadAPI from './components/API_Components/ReadAPI';
-// import MainSidebar from './components/MainSidebar';
-import Layout from './components/Layout';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import CreateMeetingRoom from "./components/VideoCall_App_Components/MeetingRoom.jsx";
+import JoinScreen from "./components/VideoCall_App_Components/JoinScreen.jsx";
+import AdminPanel from "./components/VideoCall_App_Components/AdminPanel.jsx";
+import CreateAPI from "./components/API_Components/CreateApi.jsx";
+import ReadAPI from "./components/API_Components/ReadAPI.jsx";
+import Layout from "./components/Layout.jsx";
+import MeetingList from "./components/VideoCall_App_Components/MeetingList.jsx";
+import Login from "./components/Chat_App_Components/Login.jsx";
+import Register from "./components/Chat_App_Components/Register.jsx";
+import { VerifyUser } from "./utils/VerifyUser.jsx";
+import Home from "./components/Chat_App_Components/Home.jsx";
+import { Helmet } from "react-helmet";
+import logo from "./assets/logo.png";
 
 function App() {
-
   return (
-    <Provider store={store}>
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Conn-Action Dashboard </title>
+        <link rel="icon" type="image/svg+xml" href={logo} />
+      </Helmet>
+
       <Router>
         <Routes>
-        <Route path="/" element={<Layout/>} />
-        <Route path="/createMeeting" element={ <CreateMeetingRoom />} />
-        <Route path="/meetings/:meetingId" element={<Sidebar />} />
-        <Route path='/admin' element={<AdminPanel/>}/>
-        <Route path="/meetRoom/:id" element={<JoinScreen />} />
-        <Route path="/CreateAPI" element={<CreateAPI />} />
-        <Route path="/ReadAPI" element={<ReadAPI />} />
+          <Route path="/" element={<Layout />}>
+            <Route path="/createMeeting" element={<CreateMeetingRoom />} />
+            <Route path="/meetings/:meetingId" element={<MeetingList />} />
+            <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/meetRoom/:id" element={<JoinScreen />} />
+            <Route path="/CreateAPI" element={<CreateAPI />} />
+            <Route path="/ReadAPI" element={<ReadAPI />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route element={<VerifyUser />}>
+              <Route path="/chatapp" element={<Home />} />
+            </Route>
+          </Route>
         </Routes>
       </Router>
-    </Provider>
+    </>
   );
 }
 

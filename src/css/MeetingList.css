@@ -1,15 +1,21 @@
 /* MeetingList.css */
+
+.main-div{
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  user-select: none;
+  background-color: rgba(179, 198, 224, 0.562);
+}
 .meeting-list-container {
-    max-width: 300px;
-    margin: 40px auto;
-    padding: 20px;
-    border-radius: 10px;
-  
+      user-select: none;
+      width:auto;
   }
   
   
-  .meeting-list-container input,
-  .meeting-list-container select {
+  .meeting-list-container .meet-input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -20,7 +26,7 @@
     color: black;
   }
   
-  .meeting-list-container button {
+  .meeting-list-container .meet-btn {
     width: 100%;
     padding: 10px;
     background-color: #0e77ee;
@@ -32,7 +38,7 @@
     user-select: none; 
   }
   
-  .meeting-list-container button:hover {
+  .meeting-list-container .meet-btn:hover {
     background-color: #033799;
   }
   

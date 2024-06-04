@@ -1,8 +1,8 @@
 // src/app/store.js
 
-import { configureStore } from '@reduxjs/toolkit';
-import meetingReducer from './Reducers/meetingSlice';
-import { CRUD_APIReducer } from './Reducers/CRUD_API.reducers';
+import { configureStore } from "@reduxjs/toolkit";
+import meetingReducer from "./Reducers/meetingSlice.js";
+import { CRUD_APIReducer } from "../Redux/Reducers/CRUD_API.reducers.jsx";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +10,3 @@ export const store = configureStore({
     CRUD_API: CRUD_APIReducer,
   },
 });
-
-

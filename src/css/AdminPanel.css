@@ -1,8 +1,10 @@
 /* src/css/AdminPanel.css */
 .admin-panel {
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: rgba(179, 198, 224, 0.562);
     user-select: none; 
+    height: 100vh;
+    width: 100vw;
   }
   
   .admin-panel h2 {
@@ -14,6 +16,7 @@
     width: 100%;
     border-collapse: collapse;
     margin: 0 auto;
+    background-color: white;
   }
   
   .requests-table th, .requests-table td {
@@ -22,7 +25,7 @@
   }
   
   .requests-table th {
-    background-color: #4CAF50;
+    background-color: #0e77ee;
     color: white;
   }
   
@@ -30,20 +33,24 @@
     background-color: #f2f2f2;
   }
   
-  .requests-table tr:hover {
-    background-color: #ddd;
-  }
   
+  .btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
   .approve-btn, .deny-btn {
     padding: 5px 10px;
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    margin-right: 5px;
+    transition: transform 0.3s ease;
   }
-  
+  .approve-btn:hover, .deny-btn:hover{
+    transform: scale(1.1);
+  }
   .approve-btn {
-    background-color: #4CAF50;
+    background-color: #0e77ee;
     color: white;
   }
   

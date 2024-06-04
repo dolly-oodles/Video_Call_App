@@ -4,9 +4,7 @@ import { FaCamera, FaMicrophone, FaMicrophoneSlash } from "react-icons/fa";
 import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
 import { MdOutlineScreenShare } from "react-icons/md";
 import { MdOutlineStopScreenShare } from "react-icons/md";
-
-import Sidebar from "./Sidebar";
-import styles from "../css/joinScreen.module.css"; // Importing CSS module
+import styles from "../../css/joinScreen.module.css";
 import { useLocation } from "react-router-dom";
 
 function JoinScreen() {
@@ -90,89 +88,83 @@ function JoinScreen() {
   };
 
   return (
-    <div style={{ display: "flex" }}>
-      <Sidebar />
+    <div className={styles.joinScreen}>
+      {videoControls || isScreenSharing ? (
+        <video
+          id="localVideo"
+          autoPlay
+          playsInline
+          controls={false}
+          className={styles.videoElement}
+        />
+      ) : (
+        <div className={styles.avatarContainer}>
+          <div
+            className={styles.avatarCircle}
+            style={{ backgroundColor: avatarBgColor }}
+          >
+            <span className={styles.avatarInitial}>
+              {candidateName ? candidateName.charAt(0).toUpperCase() : ""}
+            </span>
+          </div>
+        </div>
+      )}
 
-      <div className={styles.joinScreen}>
-        {videoControls || isScreenSharing ? (
-          <video
-            id="localVideo"
-            autoPlay
-            playsInline
-            controls={false}
-            className={styles.videoElement}
+      <div className={styles.controls}>
+        {videoControls ? (
+          <FaCamera
+            size={"2.4rem"}
+            className={styles.controlIcon}
+            onClick={toggleVideo}
           />
         ) : (
-          <div className={styles.avatarContainer}> 
-            <div
-              className={styles.avatarCircle} 
-              style={{ backgroundColor: avatarBgColor }}
-            >
-              <span className={styles.avatarInitial}> 
-                {candidateName ? candidateName.charAt(0).toUpperCase() : ""}
-              </span>
-            </div>
-          </div>
+          <BiSolidCameraOff
+            size={"2.4rem"}
+            className={styles.controlIcon}
+            onClick={toggleVideo}
+          />
+        )}
+        {audioControls ? (
+          <FaMicrophone
+            size={"2.4rem"}
+            className={styles.controlIcon}
+            onClick={toggleAudio}
+          />
+        ) : (
+          <FaMicrophoneSlash
+            size={"2.4rem"}
+            className={styles.controlIcon}
+            onClick={toggleAudio}
+          />
         )}
 
-        <div className={styles.controls}> 
-          {videoControls ? (
-            <FaCamera
-              size={"2.4rem"} 
-              className={styles.controlIcon} 
-              onClick={toggleVideo}
-            />
-          ) : (
-            <BiSolidCameraOff
-               size={"2.4rem"}
-              className={styles.controlIcon} 
-              onClick={toggleVideo}
-            />
-          )}
-          {audioControls ? (
-            <FaMicrophone
-              size={"2.4rem"}
-              className={styles.controlIcon} 
-              onClick={toggleAudio}
-            />
-          ) : (
-            <FaMicrophoneSlash
-               size={"2.4rem"}
-              className={styles.controlIcon} 
-              onClick={toggleAudio}
-            />
-          )}
+        {isScreenSharing ? (
+          <MdOutlineStopScreenShare
+            size={"2.4rem"}
+            className={styles.controlIcon}
+            onClick={toggleScreenSharing}
+          />
+        ) : (
+          <MdOutlineScreenShare
+            size={"2.4rem"}
+            className={styles.controlIcon}
+            onClick={toggleScreenSharing}
+          />
+        )}
 
-          {isScreenSharing ? (
-            <MdOutlineStopScreenShare
-             size={"2.4rem"}
-              className={styles.controlIcon} 
-              onClick={toggleScreenSharing}
-            />
-          ) : (
-            <MdOutlineScreenShare
-              size={"2.4rem"}
-              className={styles.controlIcon} 
-              onClick={toggleScreenSharing}
-            />
-          )}
-
-          {isFullScreen ? (
-            <MdFullscreenExit
-               size={"2.4rem"}
-              className={styles.controlIcon} 
-              onClick={toggleFullScreen}
-            />
-          ) : (
-            <MdFullscreen
-               size={"2.4rem"}
-              className={styles.controlIcon} 
-              onClick={toggleFullScreen}
-            />
-          )}
-
-        </div>
-        
+        {isFullScreen ? (
+          <MdFullscreenExit
+            size={"2.4rem"}
+            className={styles.controlIcon}
+            onClick={toggleFullScreen}
+          />
+        ) : (
+          <MdFullscreen
+            size={"2.4rem"}
+            className={styles.controlIcon}
+            onClick={toggleFullScreen}
+          />
+        )}
       </div>
     </div>
   );

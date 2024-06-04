@@ -4,8 +4,8 @@ import {
   selectMeeting,
   denyRequest,
   approveRequest,
-} from "../Redux/Reducers/meetingSlice";
-import "../css/AdminPanel.css";
+} from "../../Redux/Reducers/meetingSlice";
+import "../../css/AdminPanel.css";
 import { useNavigate } from "react-router-dom";
 
 const AdminPanel = () => {
@@ -49,7 +49,7 @@ const AdminPanel = () => {
               <tr key={request.id}>
                 <td>{request.candidateName}</td>
                 <td>{request.meetingId}</td>
-                <td>
+                <td className="btn">
                   <button
                     className="approve-btn"
                     onClick={() => handleApprove(request.id)}
