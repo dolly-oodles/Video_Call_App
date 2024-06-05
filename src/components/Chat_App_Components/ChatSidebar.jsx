@@ -37,7 +37,6 @@ const ChatSidebar = ({ onSelectUser }) => {
           setLoading(false);
         }
         setLoading(false);
-        console.log(loading);
         setChatUser(data);
       } catch (error) {
         setLoading(false);
@@ -45,7 +44,8 @@ const ChatSidebar = ({ onSelectUser }) => {
       }
     };
     chatUserHandler();
-  }, [loading, setLoading]);
+  }, []);
+  console.log(loading);
 
   const handelSearchSubmit = async (e) => {
     e.preventDefault();
