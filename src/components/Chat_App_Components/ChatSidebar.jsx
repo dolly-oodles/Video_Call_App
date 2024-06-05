@@ -104,7 +104,7 @@ const ChatSidebar = ({ onSelectUser }) => {
         clearLocalStorage();
         setAuthUser(null);
         setLoading(false);
-        navigate("/login");
+        navigate("/");
       } catch (error) {
         setLoading(false);
         console.log(error);

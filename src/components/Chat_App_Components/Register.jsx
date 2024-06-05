@@ -45,7 +45,7 @@ const Register = () => {
       localStorage.setItem("chatapp", JSON.stringify(data));
       setAuthUser(data);
       setLoading(false);
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -189,7 +189,7 @@ const Register = () => {
         <div className="pt-2">
           <p className="text-sm font-semibold text-gray-500">
             Don't have an account ?{" "}
-            <Link to={"/login"}>
+            <Link to={"/"}>
               <span className="text-blue-300 font-bold underline cursor-pointer hover:text-blue-600">
                 Login Now!
               </span>
