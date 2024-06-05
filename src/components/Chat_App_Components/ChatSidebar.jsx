@@ -17,7 +17,7 @@ const ChatSidebar = ({ onSelectUser }) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchUser, setSearchuser] = useState([]);
   const [chatUser, setChatUser] = useState([]);
-  const [setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [selectedUserId, setSetSelectedUserId] = useState(null);
   const { message, selectedConversation, setSelectedConversation } =
     userConversation();
