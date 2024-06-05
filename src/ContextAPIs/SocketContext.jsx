@@ -12,25 +12,26 @@ export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [onlineUser, setOnlineUser] = useState([]);
   const { authUser } = useAuth();
-  const socketconn = io("https://chat-app-backend-hhmx.onrender.com/", {
-    query: {
-      userId: authUser && authUser?._id,
-    },
-  });
+
   useEffect(() => {
     if (authUser) {
-      socketconn.on("getOnlineUsers", (users) => {
+      const socket = io("https://chat-app-backend-hhmx.onrender.com/", {
+        query: {
+          userId: authUser && authUser?._id,
+        },
+      });
+      socket.on("getOnlineUsers", (users) => {
         setOnlineUser(users);
       });
-      setSocket(socketconn);
-      return () => socketconn.close();
+      setSocket(socket);
+      return () => socket.close();
     } else {
-      if (socketconn) {
-        socketconn.close();
+      if (socket) {
+        socket.close();
         setSocket(null);
       }
     }
-  }, [authUser, socket, socketconn]);
+  }, [authUser]);
   return (
     <SocketContext.Provider value={{ socket, onlineUser }}>
       {children}
