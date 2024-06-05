@@ -3,7 +3,7 @@ import { SiPlausibleanalytics } from "react-icons/si";
 import { TbApi } from "react-icons/tb";
 import { BsChatDotsFill } from "react-icons/bs";
 import { FaCamera } from "react-icons/fa";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
   return (

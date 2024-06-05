@@ -27,7 +27,7 @@ function JoinScreen() {
     }
     return color;
   };
-  const [avatarBgColor, setAvatarBgColor] = useState(generateRandomColor());
+  const [avatarBgColor] = useState(generateRandomColor());
 
   const playVideoFromCamera = useCallback(async () => {
     try {
