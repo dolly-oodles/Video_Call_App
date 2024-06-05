@@ -26,15 +26,15 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/createMeeting" element={<CreateMeetingRoom />} />
-            <Route path="/meetings/:meetingId" element={<MeetingList />} />
-            <Route path="/admin" element={<AdminPanel />} />
-            <Route path="/meetRoom/:id" element={<JoinScreen />} />
-            <Route path="/CreateAPI" element={<CreateAPI />} />
-            <Route path="/ReadAPI" element={<ReadAPI />} />
-            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
             <Route element={<VerifyUser />}>
+              <Route path="/createMeeting" element={<CreateMeetingRoom />} />
+              <Route path="/meetings/:meetingId" element={<MeetingList />} />
+              <Route path="/admin" element={<AdminPanel />} />
+              <Route path="/meetRoom/:id" element={<JoinScreen />} />
+              <Route path="/CreateAPI" element={<CreateAPI />} />
+              <Route path="/ReadAPI" element={<ReadAPI />} />
               <Route path="/chatapp" element={<Home />} />
             </Route>
           </Route>
