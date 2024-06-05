@@ -35,15 +35,17 @@ function JoinScreen() {
       let stream;
       if (isScreenSharing) {
         stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
-        stream.getVideoTracks()[0].addEventListener("ended", () => {
+        stream.getVideoTracks()[0].onended = function () {
           setIsScreenSharing(false);
           setStream(null);
-        });
+        };
       } else {
         stream = await navigator.mediaDevices.getUserMedia(constraints);
       }
       const videoElement = document.querySelector("video#localVideo");
-      videoElement.srcObject = stream;
+      if (videoElement) {
+        videoElement.srcObject = stream;
+      }
       setStream(stream);
     } catch (error) {
       console.error("Error opening video camera.", error);
@@ -64,6 +66,15 @@ function JoinScreen() {
     });
   }, [stream]);
 
+  useEffect(() => {
+    if (stream) {
+      // Update the audio track if the audioControls state changes
+      stream
+        .getAudioTracks()
+        .forEach((track) => (track.enabled = audioControls));
+    }
+  }, [audioControls, stream]);
+
   const toggleAudio = useCallback(() => {
     setAudioControls((prevState) => {
       const newState = !prevState;
@@ -75,22 +86,71 @@ function JoinScreen() {
   }, [stream]);
 
   const toggleScreenSharing = useCallback(async () => {
-    setIsScreenSharing((prevState) => !prevState);
-  }, []);
+    try {
+      if (!isScreenSharing) {
+        const stream = await navigator.mediaDevices.getDisplayMedia({
+          video: true,
+        });
+        setIsScreenSharing(true);
+        setStream(stream);
+        stream.getVideoTracks()[0].onended = function () {
+          setIsScreenSharing(false);
+          setStream(null);
+        };
+      } else {
+        if (stream) {
+          stream.getTracks().forEach((track) => track.stop());
+        }
+        setIsScreenSharing(false);
+        setStream(null);
+      }
+    } catch (error) {
+      console.error("Error during screen sharing:", error);
+      setIsScreenSharing(false);
+    }
+  }, [isScreenSharing, stream]);
 
   const toggleFullScreen = () => {
     const videoElement = document.querySelector("video#localVideo");
+    const avatarContainer = document.querySelector(
+      `.${styles.avatarContainer}`
+    );
 
-    if (!document.fullscreenElement) {
-      // if (videoElement.requestFullscreen) {
-      videoElement.requestFullscreen();
-      // }
-      setIsFullScreen(true);
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
+    const elementToFullscreen = videoElement || avatarContainer;
+
+    if (elementToFullscreen) {
+      if (!document.fullscreenElement) {
+        if (elementToFullscreen.requestFullscreen) {
+          elementToFullscreen.requestFullscreen();
+        } else if (elementToFullscreen.mozRequestFullScreen) {
+          /* Firefox */
+          elementToFullscreen.mozRequestFullScreen();
+        } else if (elementToFullscreen.webkitRequestFullscreen) {
+          /* Chrome, Safari and Opera */
+          elementToFullscreen.webkitRequestFullscreen();
+        } else if (elementToFullscreen.msRequestFullscreen) {
+          /* IE/Edge */
+          elementToFullscreen.msRequestFullscreen();
+        }
+        setIsFullScreen(true);
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          /* Firefox */
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          /* Chrome, Safari and Opera */
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+          /* IE/Edge */
+          document.msExitFullscreen();
+        }
+        setIsFullScreen(false);
       }
+    } else {
       setIsFullScreen(false);
+      console.warn("No element found to toggle full screen.");
     }
   };
 
@@ -111,6 +171,7 @@ function JoinScreen() {
         <video
           id="localVideo"
           autoPlay
+          muted
           playsInline
           controls={false}
           className={styles.videoElement}

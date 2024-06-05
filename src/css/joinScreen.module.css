@@ -36,6 +36,7 @@
     padding: 6px;
     opacity: 2px;
     transition: color 0.3s ease;
+    margin-bottom: 14px;
   }
   .callcontrolIcon{
     background-color: #ff0000a4;
