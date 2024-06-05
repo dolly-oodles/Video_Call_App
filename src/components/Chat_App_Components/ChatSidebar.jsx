@@ -37,6 +37,7 @@ const ChatSidebar = ({ onSelectUser }) => {
           setLoading(false);
         }
         setLoading(false);
+        console.log(loading);
         setChatUser(data);
       } catch (error) {
         setLoading(false);
