@@ -3,7 +3,7 @@ import { BiSolidCameraOff } from "react-icons/bi";
 import { FaCamera, FaMicrophone, FaMicrophoneSlash } from "react-icons/fa";
 import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
 import { MdOutlineScreenShare } from "react-icons/md";
-import { MdOutlineStopScreenShare } from "react-icons/md";
+// import { MdOutlineStopScreenShare } from "react-icons/md";
 import { HiOutlinePhoneMissedCall } from "react-icons/hi";
 import styles from "../../css/joinScreen.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -35,6 +35,10 @@ function JoinScreen() {
       let stream;
       if (isScreenSharing) {
         stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+        stream.getVideoTracks()[0].addEventListener("ended", () => {
+          setIsScreenSharing(false);
+          setStream(null);
+        });
       } else {
         stream = await navigator.mediaDevices.getUserMedia(constraints);
       }
@@ -76,10 +80,11 @@ function JoinScreen() {
 
   const toggleFullScreen = () => {
     const videoElement = document.querySelector("video#localVideo");
+
     if (!document.fullscreenElement) {
-      if (videoElement.requestFullscreen) {
-        videoElement.requestFullscreen();
-      }
+      // if (videoElement.requestFullscreen) {
+      videoElement.requestFullscreen();
+      // }
       setIsFullScreen(true);
     } else {
       if (document.exitFullscreen) {
@@ -93,6 +98,10 @@ function JoinScreen() {
     if (stream) {
       stream.getTracks().forEach((track) => track.stop());
       setStream(null);
+      setVideoControls(false);
+      setAudioControls(false);
+      setIsScreenSharing(false);
+      setIsFullScreen(false);
     }
     navigate("/createMeeting");
   };
@@ -147,19 +156,11 @@ function JoinScreen() {
           />
         )}
 
-        {isScreenSharing ? (
-          <MdOutlineStopScreenShare
-            size={"2.4rem"}
-            className={styles.controlIcon}
-            onClick={toggleScreenSharing}
-          />
-        ) : (
-          <MdOutlineScreenShare
-            size={"2.4rem"}
-            className={styles.controlIcon}
-            onClick={toggleScreenSharing}
-          />
-        )}
+        <MdOutlineScreenShare
+          size={"2.4rem"}
+          className={styles.controlIcon}
+          onClick={toggleScreenSharing}
+        />
 
         {isFullScreen ? (
           <MdFullscreenExit
