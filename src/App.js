@@ -26,8 +26,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
+            <Route index element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
             <Route element={<VerifyUser />}>
               <Route path="/createMeeting" element={<CreateMeetingRoom />} />
               <Route path="/meetings/:meetingId" element={<MeetingList />} />
