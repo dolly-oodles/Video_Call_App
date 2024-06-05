@@ -9,25 +9,25 @@ export const useSocketContext = () => {
 };
 
 export const SocketContextProvider = ({ children }) => {
-  // const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState(null);
   const [onlineUser, setOnlineUser] = useState([]);
   const { authUser } = useAuth();
-  const socket = io("https://chat-app-backend-hhmx.onrender.com/", {
+  const socketconn = io("https://chat-app-backend-hhmx.onrender.com/", {
     query: {
       userId: authUser && authUser?._id,
     },
   });
   useEffect(() => {
     if (authUser) {
-      socket.on("getOnlineUsers", (users) => {
+      socketconn.on("getOnlineUsers", (users) => {
         setOnlineUser(users);
       });
-      // setSocket(socket);
+      setSocket(socketconn);
       return () => socket.close();
     } else {
       if (socket) {
         socket.close();
-        // setSocket(null);
+        setSocket(null);
       }
     }
   }, [authUser, socket]);
